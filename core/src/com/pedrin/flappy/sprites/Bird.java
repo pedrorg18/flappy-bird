@@ -17,21 +17,19 @@ public class Bird {
     private Vector3 position;
     private Vector3 velocity;
     private Rectangle bounds;
-//    private Animation birdAnimation;
+    private Animation birdAnimation;
 
     private Texture bird;
-//    Texture texture;
+    Texture texture;
 
     private Sound flap;
 
     public Bird(int x, int y){
         position = new Vector3(x,y,0);
         velocity = new Vector3(0,0,0);
-        bird = new Texture("pedrin_trans.png");
-//        bounds = new Rectangle(x,y,bird.getWidth(), bird.getHeight());
-        bounds = new Rectangle(x,y,34, 26);
-//        birdAnimation = new Animation(new TextureRegion(texture), 3, 0.5f);
-//        bounds = new Rectangle(x,y,texture.getWidth()/3, texture.getHeight());
+        texture = new Texture("birdanimation.png");
+        birdAnimation = new Animation(new TextureRegion(texture), 3, 0.5f);
+        bounds = new Rectangle(x,y,texture.getWidth()/3, texture.getHeight());
         flap = Gdx.audio.newSound(Gdx.files.internal("sfx_wing.ogg"));
     }
 
@@ -39,16 +37,12 @@ public class Bird {
         return position;
     }
 
-//    public TextureRegion getTexture() {
-//        return birdAnimation.getFrame();
-//    }
-
-    public Texture getTexture() {
-        return bird;
+    public TextureRegion getTexture() {
+        return birdAnimation.getFrame();
     }
 
     public void update(float dt){
-//        birdAnimation.update(dt);
+        birdAnimation.update(dt);
         if(position.y>0) {
             velocity.add(0, GRAVITY, 0);
         }
@@ -71,8 +65,7 @@ public class Bird {
     }
 
     public void dispose() {
-//        texture.dispose();
-        bird.dispose();
+        texture.dispose();
         flap.dispose();
     }
 }
